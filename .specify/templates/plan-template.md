@@ -12,13 +12,14 @@
    → Detect Project Type from file system structure or context (web=frontend+backend, mobile=app+api)
    → Set Structure Decision based on project type
 3. Fill the Constitution Check section based on the content of the constitution document.
+   → Explicitly cover: offline-only execution, `uv`-locked builds, agent-led analysis, Pydantic schemas with provenance, CI gates (ruff/mypy/pytest), performance/privacy limits, Conventional Commit enforcement.
 4. Evaluate Constitution Check section below
    → If violations exist: Document in Complexity Tracking
    → If no justification possible: ERROR "Simplify approach first"
    → Update Progress Tracking: Initial Constitution Check
 5. Execute Phase 0 → research.md
    → If NEEDS CLARIFICATION remain: ERROR "Resolve unknowns"
-6. Execute Phase 1 → contracts, data-model.md, quickstart.md, agent-specific template file (e.g., `CLAUDE.md` for Claude Code, `.github/copilot-instructions.md` for GitHub Copilot, `GEMINI.md` for Gemini CLI, `QWEN.md` for Qwen Code or `AGENTS.md` for opencode).
+6. Execute Phase 1 → contracts, data-model.md, quickstart.md, agent prompt catalog (document LLM workflows, prompts, guardrails)
 7. Re-evaluate Constitution Check section
    → If new violations: Refactor design, return to Phase 1
    → Update Progress Tracking: Post-Design Constitution Check
@@ -47,7 +48,13 @@
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- Local Deterministic Execution: confirm offline-only workflows, documented `uv` lockfiles, reproducible artifacts.
+- Agent-Led Analysis: map each complex decision to an LLM agent with versioned prompts; Python-only steps limited to deterministic transforms.
+- Schema & Provenance Integrity: identify required Pydantic models, enforcement of `source_id` on every resume bullet, and validation checkpoints.
+- Quality Gates & Continuous Testing: plan coverage for `ruff`, `mypy`, `pytest`, including deterministic fixtures.
+- UX & Delivery Fidelity: ensure CLI UX stability, ATS-safe outputs, Typst as presentation-only, docs update plan.
+- Performance & Privacy Discipline: forecast ≤5s end-to-end runtime, bounded resources, and privacy safeguards with local-only data handling.
+- Governance Discipline: document Conventional Commit enforcement and other governance gates required for merge readiness.
 
 ## Project Structure
 
@@ -151,16 +158,12 @@ directories captured above]
    - Each story → integration test scenario
    - Quickstart test = story validation steps
 
-5. **Update agent file incrementally** (O(1) operation):
-   - Run `.specify/scripts/bash/update-agent-context.sh cursor`
-     **IMPORTANT**: Execute it exactly as specified above. Do not add or remove any arguments.
-   - If exists: Add only NEW tech from current plan
-   - Preserve manual additions between markers
-   - Update recent changes (keep last 3)
-   - Keep under 150 lines for token efficiency
-   - Output to repository root
+5. **Update agent prompt catalog incrementally**:
+   - Record each LLM agent, purpose, prompt template, expected outputs, safety guardrails.
+   - Link prompts to generated artifacts (e.g., data-model.md, Typst render plan).
+   - Keep documents under 150 lines for token efficiency.
 
-**Output**: data-model.md, /contracts/*, failing tests, quickstart.md, agent-specific file
+**Output**: data-model.md, /contracts/*, failing tests, quickstart.md, agent prompt catalog
 
 ## Phase 2: Task Planning Approach
 *This section describes what the /tasks command will do - DO NOT execute during /plan*
@@ -213,7 +216,8 @@ directories captured above]
 - [ ] Initial Constitution Check: PASS
 - [ ] Post-Design Constitution Check: PASS
 - [ ] All NEEDS CLARIFICATION resolved
+- [ ] Conventional Commit policy documented
 - [ ] Complexity deviations documented
 
 ---
-*Based on Constitution v2.1.1 - See `/memory/constitution.md`*
+*Based on Constitution v1.0.0 - See `/memory/constitution.md`

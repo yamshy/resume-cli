@@ -7,21 +7,24 @@
 ```
 1. Load plan.md from feature directory
    → If not found: ERROR "No implementation plan found"
-   → Extract: tech stack, libraries, structure
+   → Extract: tech stack, libraries, structure, constitution compliance notes
 2. Load optional design documents:
-   → data-model.md: Extract entities → model tasks
-   → contracts/: Each file → contract test task
-   → research.md: Extract decisions → setup tasks
+   → data-model.md: Extract entities & required provenance → model tasks
+   → contracts/: Each file → contract test task (ensure offline datasets)
+   → research.md: Extract decisions → setup tasks, confirm agent workflows
+   → agent prompt catalog: Derive tasks to version prompts and guardrails
+   → commit policy docs: Identify Conventional Commit enforcement tasks
 3. Generate tasks by category:
    → Setup: project init, dependencies, linting
-   → Tests: contract tests, integration tests
-   → Core: models, services, CLI commands
-   → Integration: DB, middleware, logging
-   → Polish: unit tests, performance, docs
+   → Tests: contract tests, integration tests, provenance enforcement tests
+   → Core: models, services, CLI commands with strict Pydantic schemas
+   → Integration: deterministic pipelines, agent orchestration glue
+   → Polish: performance benchmark verification, offline docs, ATS validation, Conventional Commit verification
 4. Apply task rules:
    → Different files = mark [P] for parallel
    → Same file = sequential (no [P])
    → Tests before implementation (TDD)
+   → Validate offline execution, provenance, agent prompt updates, and Conventional Commit enforcement before feature completion
 5. Number tasks sequentially (T001, T002...)
 6. Generate dependency graph
 7. Create parallel execution examples
@@ -29,6 +32,7 @@
    → All contracts have tests?
    → All entities have models?
    → All endpoints implemented?
+   → All agent workflows documented and versioned?
 9. Return: SUCCESS (tasks ready for execution)
 ```
 
@@ -45,36 +49,36 @@
 ## Phase 3.1: Setup
 - [ ] T001 Create project structure per implementation plan
 - [ ] T002 Initialize [language] project with [framework] dependencies
-- [ ] T003 [P] Configure linting and formatting tools
+- [ ] T003 [P] Configure linting and formatting tools (`ruff`, `mypy`, `pytest`, typst lint, Conventional Commit hook)
 
 ## Phase 3.2: Tests First (TDD) ⚠️ MUST COMPLETE BEFORE 3.3
 **CRITICAL: These tests MUST be written and MUST FAIL before ANY implementation**
-- [ ] T004 [P] Contract test POST /api/users in tests/contract/test_users_post.py
-- [ ] T005 [P] Contract test GET /api/users/{id} in tests/contract/test_users_get.py
-- [ ] T006 [P] Integration test user registration in tests/integration/test_registration.py
-- [ ] T007 [P] Integration test auth flow in tests/integration/test_auth.py
+- [ ] T004 [P] Contract test resume build flow in tests/contract/test_resume_cli.py (offline fixtures only)
+- [ ] T005 [P] Provenance validation test ensuring every bullet includes `source_id`
+- [ ] T006 [P] Integration test CLI end-to-end run completes ≤5 seconds using reference data
+- [ ] T007 [P] Agent prompt contract tests verifying expected outputs recorded in agent catalog
 
 ## Phase 3.3: Core Implementation (ONLY after tests are failing)
-- [ ] T008 [P] User model in src/models/user.py
-- [ ] T009 [P] UserService CRUD in src/services/user_service.py
-- [ ] T010 [P] CLI --create-user in src/cli/user_commands.py
-- [ ] T011 POST /api/users endpoint
-- [ ] T012 GET /api/users/{id} endpoint
-- [ ] T013 Input validation
-- [ ] T014 Error handling and logging
+- [ ] T008 [P] Resume models with strict Pydantic schemas in src/models/resume.py
+- [ ] T009 [P] Agent orchestration service in src/services/agent_orchestrator.py
+- [ ] T010 [P] CLI `resumecli build` command orchestrating agent workflows
+- [ ] T011 Deterministic Typst render pipeline preserving ATS-safe content
+- [ ] T012 Provenance enforcement pipeline rejecting missing `source_id`
+- [ ] T013 Privacy-safe local storage for evidence artifacts
+- [ ] T014 Structured error handling with script-friendly output
 
 ## Phase 3.4: Integration
-- [ ] T015 Connect UserService to DB
-- [ ] T016 Auth middleware
-- [ ] T017 Request/response logging
-- [ ] T018 CORS and security headers
+- [ ] T015 Offline data source synchronization scripts using versioned fixtures
+- [ ] T016 Agent prompt catalog versioning and provenance link updates
+- [ ] T017 Performance profiling scripts ensuring ≤5s execution
+- [ ] T018 Privacy review checklist updates stored locally
 
 ## Phase 3.5: Polish
-- [ ] T019 [P] Unit tests for validation in tests/unit/test_validation.py
-- [ ] T020 Performance tests (<200ms)
-- [ ] T021 [P] Update docs/api.md
-- [ ] T022 Remove duplication
-- [ ] T023 Run manual-testing.md
+- [ ] T019 [P] Unit tests for Pydantic schema validation in tests/unit/test_schema.py
+- [ ] T020 Performance regression test verifying ≤5s end-to-end
+- [ ] T021 [P] Update offline docs & CLI help to reflect feature
+- [ ] T022 Remove duplication and confirm determinism in outputs
+- [ ] T023 Run manual-testing.md with offline checklist and privacy verification
 
 ## Dependencies
 - Tests (T004-T007) before implementation (T008-T014)
@@ -85,10 +89,10 @@
 ## Parallel Example
 ```
 # Launch T004-T007 together:
-Task: "Contract test POST /api/users in tests/contract/test_users_post.py"
-Task: "Contract test GET /api/users/{id} in tests/contract/test_users_get.py"
-Task: "Integration test registration in tests/integration/test_registration.py"
-Task: "Integration test auth in tests/integration/test_auth.py"
+Task: "Contract test resume build flow in tests/contract/test_resume_cli.py"
+Task: "Provenance validation test ensuring every bullet includes source_id"
+Task: "Integration test CLI end-to-end run completes ≤5 seconds"
+Task: "Agent prompt contract tests verifying expected outputs"
 ```
 
 ## Notes

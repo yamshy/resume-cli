@@ -1,50 +1,91 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+- Version change: N/A → 1.0.0
+- Modified principles: Newly established (I-VI)
+- Added sections: Core Principles, Mandatory Standards, Workflow & Execution Governance, Governance
+- Removed sections: Template placeholders
+- Templates requiring updates:
+  - ✅ .specify/templates/plan-template.md
+  - ✅ .specify/templates/spec-template.md
+  - ✅ .specify/templates/tasks-template.md
+- Follow-up TODOs: None
+-->
+
+# resumecli Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Local Deterministic Execution
+- All commands MUST execute entirely offline; network connectivity is disabled in development, CI, and runtime environments.
+- Dependency management, build steps, and caching MUST be controlled by `uv`, producing reproducible lockfiles and deterministic builds across machines.
+- CLI workflows MUST avoid machine-specific state; required fixtures and datasets live under version control with documented refresh procedures.
+- Release artifacts MUST be reproducible by re-running documented steps; any deviation blocks publication until resolved.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+Rationale: Guarantees local-first reliability and reproducibility for every resume build.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Agent-Led Analysis
+- Complex analysis, parsing, ranking, and narrative assembly MUST be delegated to approved LLM agents; handcrafted heuristics, bespoke scoring logic, or regex-driven pipelines beyond trivial parsing are prohibited.
+- Python code MAY perform deterministic data transformations, file orchestration, and schema validation; ambiguous or knowledge-heavy logic MUST be escalated to agent workflows.
+- Plans and specs MUST document the agent responsible for each complex step, including required prompts and expected artifacts.
+- New automation MUST preserve the agent-first flow and document reproducibility controls before merging.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+Rationale: Maintains clarity of responsibility, leverages LLM strengths, and keeps deterministic glue code simple.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Schema & Provenance Integrity
+- All structured data MUST use strict Pydantic models with runtime validation, explicit field constraints, and `validate_assignment` enabled to catch drift.
+- Every resume bullet or narrative element MUST carry a `source_id` tying it back to verifiable evidence; missing provenance is a release blocker.
+- Titles, dates, metrics, and counts MUST match provided sources exactly; invented or hallucinated values are forbidden.
+- Pipelines MUST emit validation reports highlighting schema violations or missing sources before content exits the agent boundary.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Rationale: Ensures factual accuracy, traceability, and trust in generated resumes.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Quality Gates & Continuous Testing
+- `ruff`, `mypy`, and `pytest` MUST all pass locally and in CI before merging; failures halt the pipeline.
+- Tests MUST cover unit-level schema enforcement, integration-level CLI flows, and regression scenarios for offline execution.
+- Test fixtures MUST remain deterministic and agent-agnostic, enabling repeatable runs without external dependencies.
+- New functionality enters the repository alongside tests that fail without the implementation and pass once complete.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Rationale: Enforces a high bar for code quality and prevents regressions in the CLI.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. UX & Delivery Fidelity
+- CLI UX MUST stay consistent: argument names, subcommands, and exit codes remain stable and documented in `resumecli --help` and offline guides.
+- Output formats MUST be ATS-safe plain text by default, with Typst templates providing style-only formatting that never alters content order or wording.
+- CLI help, README, and offline docs MUST stay synchronized; every new capability updates user-facing guidance within the repository.
+- Error messages and progress indicators MUST remain deterministic and script-friendly, using structured JSON or plain text markers suitable for automation.
+
+Rationale: Delivers predictable, professional resumes and tooling trusted by users and applicant tracking systems.
+
+### VI. Performance & Privacy Discipline
+- A full resume generation run on reference data MUST complete in ≤5 seconds on a typical laptop; performance regressions require remediation before release.
+- Resource use (memory, disk) MUST remain bounded and documented; profiling accompanies major changes affecting runtime.
+- All data stays local by default; logs and artifacts MUST avoid transmitting or embedding personal data beyond the user’s machine.
+- Optional telemetry or analytics are disallowed; privacy reviews accompany every new data touchpoint or storage location.
+
+Rationale: Provides a fast, private experience aligned with local-first expectations.
+
+## Mandatory Standards
+
+- Offline-only enforcement is mandatory: disable network interfaces in CI and document local stubs for any third-party data.
+- Deterministic builds require `uv`-managed lockfiles, pinned Python versions, and reproducibility checks before releases.
+- Provenance auditing: CI MUST fail if any bullet lacks a `source_id` or if referenced evidence is missing.
+- Documentation MUST remain local-first: quickstart guides, CLI help, and Typst templates ship with the repo and never require online retrieval.
+- Out-of-scope for v0: cloud deployments, hosted APIs, or web UIs are prohibited until expressly ratified by a new constitution version.
+- Commit messages MUST follow Conventional Commits; CI MUST reject non-compliant messages before merge.
+
+## Workflow & Execution Governance
+
+- Development plans, specs, and tasks MUST include an explicit Constitution Check verifying compliance with Principles I–VI before implementation proceeds.
+- Agent interactions (prompts, expected outputs, guardrails) MUST be versioned alongside code to ensure reproducibility and auditability.
+- Python orchestration code MUST remain modular, well-typed, and focused on data transformation; complex decision-making requires agent workflows.
+- Release candidates MUST document performance benchmarks, privacy considerations, and provenance audits before tagging.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- This constitution supersedes other process documents; conflicts resolve in favor of the stricter rule.
+- Amendments require a pull request referencing the impacted principles, updated templates, and a justification that passes maintainer review by consensus.
+- Versioning follows semantic rules: MAJOR for principle removals or incompatible rewrites, MINOR for new principles or materially expanded guidance, PATCH for clarifications.
+- Compliance reviews occur before each tagged release and during quarterly audits; findings MUST be logged with remediation owners and deadlines.
+- Governance artifacts (constitution, plan/spec/tasks templates) MUST stay in sync; any change to one triggers review of the others within the same change set.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-10-02 | **Last Amended**: 2025-10-02
+

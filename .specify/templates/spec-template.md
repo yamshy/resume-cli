@@ -10,19 +10,23 @@
 1. Parse user description from Input
    → If empty: ERROR "No feature description provided"
 2. Extract key concepts from description
-   → Identify: actors, actions, data, constraints
+   → Identify: actors, actions, data, constraints, provenance expectations
 3. For each unclear aspect:
    → Mark with [NEEDS CLARIFICATION: specific question]
 4. Fill User Scenarios & Testing section
+   → Include offline execution expectations and ATS-safe output needs
    → If no clear user flow: ERROR "Cannot determine user scenarios"
 5. Generate Functional Requirements
    → Each requirement must be testable
+   → Include provenance rules, agent involvement, performance/privacy constraints, conventional commit enforcement where applicable
    → Mark ambiguous requirements
-6. Identify Key Entities (if data involved)
-7. Run Review Checklist
+6. Identify Key Entities (if data involved) and their required provenance fields
+7. Specify Agent Responsibilities
+   → Document which LLM agents perform complex analysis and required prompts/artifacts
+8. Run Review Checklist
    → If any [NEEDS CLARIFICATION]: WARN "Spec has uncertainties"
    → If implementation details found: ERROR "Remove tech details"
-8. Return: SUCCESS (spec ready for planning)
+9. Return: SUCCESS (spec ready for planning)
 ```
 
 ---
@@ -30,6 +34,8 @@
 ## ⚡ Quick Guidelines
 - ✅ Focus on WHAT users need and WHY
 - ❌ Avoid HOW to implement (no tech stack, APIs, code structure)
+- ✅ Highlight agent vs. deterministic responsibilities and provenance expectations
+- ✅ Note governance gates such as Conventional Commit compliance when relevant to feature scope
 - 👥 Written for business stakeholders, not developers
 
 ### Section Requirements
@@ -68,19 +74,19 @@ When creating this spec from a user prompt:
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
+- **FR-001**: System MUST [specific capability] while running entirely offline and within documented performance limits.
+- **FR-002**: System MUST [specific capability] with all complex analysis performed by [Agent Name], using documented prompts.
+- **FR-003**: Users MUST be able to [key interaction]; outputs remain ATS-safe and Typst formatting stays presentation-only.
+- **FR-004**: System MUST [data requirement] and capture `source_id` provenance for every generated bullet or narrative element.
+- **FR-005**: System MUST [behavior] validated by ruff, mypy, and pytest gates with deterministic fixtures.
 
 *Example of marking unclear requirements:*
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
-### Key Entities *(include if feature involves data)*
-- **[Entity 1]**: [What it represents, key attributes without implementation]
-- **[Entity 2]**: [What it represents, relationships to other entities]
+### Key Entities & Provenance *(include if feature involves data)*
+- **[Entity 1]**: [What it represents, key attributes, required provenance fields such as `source_id`]
+- **[Entity 2]**: [What it represents, relationships to other entities, associated validation rules]
 
 ---
 
