@@ -81,9 +81,9 @@ As a job seeker who curates personal accomplishment facts, I want to run a local
 - **FR-005**: System MUST enforce governance gates so that automated QA (ruff linting, mypy static analysis, pytest unit and integration suites) fail if any resume bullet lacks a linked fact `source_id` or if `coverage.json` reports gaps without documented rationale; provenance integrity and coverage completeness MUST be validated automatically before the feature can ship.
 - **FR-006**: System MUST solicit user confirmation on any fact whose relevance or freshness is uncertain; unconfirmed facts are excluded from generation and flagged in session logs.
 
-*Example of marking unclear requirements:*
-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
+*Example of marking unclear requirements during drafting (remove before finalization):*
+- System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
+- System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
 ### Key Entities & Provenance *(include if feature involves data)*
 - **Job Posting Input**: Represents the target role description; attributes include `source_path`, `ingestion_timestamp`, `sanitized_text`, and original provenance metadata (publisher, capture method). Requires `source_id` to track the origin of each extracted requirement.

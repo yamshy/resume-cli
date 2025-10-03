@@ -80,6 +80,8 @@ src/
 │   │   ├── coverage.py
 │   │   ├── embedding_cache.py
 │   │   └── run_log.py
+│   ├── pipeline/
+│   │   └── build_runner.py
 │   ├── services/
 │   │   ├── embeddings.py
 │   │   ├── storage.py
@@ -103,14 +105,18 @@ src/
     │   ├── test_cli_facts.py
     │   ├── test_cli_templates.py
     │   └── test_cli_doctor.py
-    └── contract/
-        ├── test_build_contract.py
-        ├── test_facts_contract.py
-        ├── test_templates_contract.py
-        └── test_doctor_contract.py
+    ├── contract/
+    │   ├── test_build_contract.py
+    │   ├── test_facts_contract.py
+    │   ├── test_templates_contract.py
+    │   └── test_doctor_contract.py
+    ├── qa/
+    │   └── test_provenance_and_coverage.py
+    └── performance/
+        └── test_build_runtime.py
 ```
 
-**Structure Decision**: Single-project CLI under `src/resumecli`, segregating functional modules (`ingestion`, `extraction`, `retrieval`, `composition`, `validation`, `rendering`) with Typer-driven CLI entrypoints; tests mirror module layout with unit, integration, and contract suites.
+**Structure Decision**: Single-project CLI under `src/resumecli`, segregating functional modules (`ingestion`, `extraction`, `retrieval`, `composition`, `validation`, `rendering`, `pipeline`) with Typer-driven CLI entrypoints. Test suites include unit, integration, contract, QA governance, and performance timing to enforce constitution mandates.
 
 ## Phase 0: Outline & Research
 - Extract unknowns derived from Technical Context (e.g., best practices for fastembed offline usage, Outlines schema alignment with Ollama, Typst rendering optimizations, hybrid FTS5+embedding retrieval tuning, offline `uv` workflows).
