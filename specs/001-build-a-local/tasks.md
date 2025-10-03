@@ -5,8 +5,8 @@
 **Prerequisites**: Python 3.13 via `uv`, Typst CLI, Ollama models per quickstart, offline environment enforced
 
 ## Phase 3.1: Setup
-- [ ] T001 Update `/var/home/shyam/projects/resume-cli/pyproject.toml` to pin Python 3.13 with `uv` and declare core dependencies (`typer`, `pydantic`, `fastembed`, `outlines`, `sqlite-utils`, `typst`, test tool extras).
-- [ ] T002 Configure tooling blocks in `/var/home/shyam/projects/resume-cli/pyproject.toml` for `ruff`, `mypy`, `pytest`, and `uv` scripts enforcing the offline governance gates.
+- [X] T001 Update `/var/home/shyam/projects/resume-cli/pyproject.toml` to pin Python 3.13 with `uv` and declare core dependencies (`typer`, `pydantic`, `fastembed`, `outlines`, `sqlite-utils`, `typst`, test tool extras).
+- [X] T002 Configure tooling blocks in `/var/home/shyam/projects/resume-cli/pyproject.toml` for `ruff`, `mypy`, `pytest`, and `uv` scripts enforcing the offline governance gates.
 - [ ] T003 Create package scaffolding under `/var/home/shyam/projects/resume-cli/src/resumecli/` (cli/, data/, models/, services/, templates/) with guarding `__init__.py` files and sample-data placeholders aligned to `quickstart.md`.
 
 ## Phase 3.2: Tests First (TDD)
