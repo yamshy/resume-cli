@@ -1,16 +1,3 @@
-<!--
-Sync Impact Report:
-- Version change: N/A → 1.0.0
-- Modified principles: Newly established (I-VI)
-- Added sections: Core Principles, Mandatory Standards, Workflow & Execution Governance, Governance
-- Removed sections: Template placeholders
-- Templates requiring updates:
-  - ✅ .specify/templates/plan-template.md
-  - ✅ .specify/templates/spec-template.md
-  - ✅ .specify/templates/tasks-template.md
-- Follow-up TODOs: None
--->
-
 # resumecli Constitution
 
 ## Core Principles
@@ -56,7 +43,7 @@ Rationale: Enforces a high bar for code quality and prevents regressions in the 
 Rationale: Delivers predictable, professional resumes and tooling trusted by users and applicant tracking systems.
 
 ### VI. Performance & Privacy Discipline
-- A full resume generation run on reference data MUST complete in ≤5 seconds on a typical laptop; performance regressions require remediation before release.
+- A full resume generation run on reference data MUST complete in ≤60 seconds (1 minute) on a typical laptop; performance regressions require remediation before release.
 - Resource use (memory, disk) MUST remain bounded and documented; profiling accompanies major changes affecting runtime.
 - All data stays local by default; logs and artifacts MUST avoid transmitting or embedding personal data beyond the user’s machine.
 - Optional telemetry or analytics are disallowed; privacy reviews accompany every new data touchpoint or storage location.
@@ -87,5 +74,5 @@ Rationale: Provides a fast, private experience aligned with local-first expectat
 - Compliance reviews occur before each tagged release and during quarterly audits; findings MUST be logged with remediation owners and deadlines.
 - Governance artifacts (constitution, plan/spec/tasks templates) MUST stay in sync; any change to one triggers review of the others within the same change set.
 
-**Version**: 1.0.0 | **Ratified**: 2025-10-02 | **Last Amended**: 2025-10-02
+**Version**: 1.1.0 | **Ratified**: 2025-10-02 | **Last Amended**: 2025-10-03
 

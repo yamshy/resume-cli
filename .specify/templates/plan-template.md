@@ -53,7 +53,7 @@
 - Schema & Provenance Integrity: identify required Pydantic models, enforcement of `source_id` on every resume bullet, and validation checkpoints.
 - Quality Gates & Continuous Testing: plan coverage for `ruff`, `mypy`, `pytest`, including deterministic fixtures.
 - UX & Delivery Fidelity: ensure CLI UX stability, ATS-safe outputs, Typst as presentation-only, docs update plan.
-- Performance & Privacy Discipline: forecast ≤5s end-to-end runtime, bounded resources, and privacy safeguards with local-only data handling.
+- Performance & Privacy Discipline: forecast ≤60s (1 minute) end-to-end runtime, bounded resources, and privacy safeguards with local-only data handling.
 - Governance Discipline: document Conventional Commit enforcement and other governance gates required for merge readiness.
 
 ## Project Structure

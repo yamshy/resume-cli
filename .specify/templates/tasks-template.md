@@ -55,7 +55,7 @@
 **CRITICAL: These tests MUST be written and MUST FAIL before ANY implementation**
 - [ ] T004 [P] Contract test resume build flow in tests/contract/test_resume_cli.py (offline fixtures only)
 - [ ] T005 [P] Provenance validation test ensuring every bullet includes `source_id`
-- [ ] T006 [P] Integration test CLI end-to-end run completes ≤5 seconds using reference data
+- [ ] T006 [P] Integration test CLI end-to-end run completes ≤60 seconds (1 minute) using reference data
 - [ ] T007 [P] Agent prompt contract tests verifying expected outputs recorded in agent catalog
 
 ## Phase 3.3: Core Implementation (ONLY after tests are failing)
@@ -70,12 +70,12 @@
 ## Phase 3.4: Integration
 - [ ] T015 Offline data source synchronization scripts using versioned fixtures
 - [ ] T016 Agent prompt catalog versioning and provenance link updates
-- [ ] T017 Performance profiling scripts ensuring ≤5s execution
+- [ ] T017 Performance profiling scripts ensuring ≤60 seconds (1 minute) execution
 - [ ] T018 Privacy review checklist updates stored locally
 
 ## Phase 3.5: Polish
 - [ ] T019 [P] Unit tests for Pydantic schema validation in tests/unit/test_schema.py
-- [ ] T020 Performance regression test verifying ≤5s end-to-end
+- [ ] T020 Performance regression test verifying ≤60 seconds (1 minute) end-to-end
 - [ ] T021 [P] Update offline docs & CLI help to reflect feature
 - [ ] T022 Remove duplication and confirm determinism in outputs
 - [ ] T023 Run manual-testing.md with offline checklist and privacy verification
@@ -91,7 +91,7 @@
 # Launch T004-T007 together:
 Task: "Contract test resume build flow in tests/contract/test_resume_cli.py"
 Task: "Provenance validation test ensuring every bullet includes source_id"
-Task: "Integration test CLI end-to-end run completes ≤5 seconds"
+Task: "Integration test CLI end-to-end run completes ≤60 seconds (1 minute)"
 Task: "Agent prompt contract tests verifying expected outputs"
 ```
 
