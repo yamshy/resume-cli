@@ -73,10 +73,13 @@ src/
 │   │   └── rendering.py
 │   ├── models/
 │   │   ├── __init__.py
+│   │   ├── job_posting.py
 │   │   ├── jobreq.py
 │   │   ├── fact.py
 │   │   ├── bullet.py
-│   │   └── coverage.py
+│   │   ├── coverage.py
+│   │   ├── embedding_cache.py
+│   │   └── run_log.py
 │   ├── services/
 │   │   ├── embeddings.py
 │   │   ├── storage.py
@@ -130,6 +133,7 @@ src/
 - Phase 3 (`/tasks`) generates `tasks.md` from finalized design.
 - Phase 4 executes implementation following tasks, ensuring offline agent workflows and provenance checks.
 - Phase 5 runs validation suite (`uv run ruff`, `uv run mypy`, `uv run pytest`, Typst render check, timing benchmarks).
+- Governance QA introduces automated `uv` scripts (e.g., `uv run qa-provenance`, `uv run qa-coverage`) that fail builds when bullets lack fact links or when `coverage.json` reports undocumented gaps, satisfying FR-005 enforcement.
 
 ## Complexity Tracking
 | Violation | Why Needed | Simpler Alternative Rejected Because |

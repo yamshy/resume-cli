@@ -78,7 +78,7 @@ As a job seeker who curates personal accomplishment facts, I want to run a local
 - **FR-002**: System MUST extract structured JobReq entries via a designated "JobReq Extractor" agent that stores prompts, intermediate reasoning, and span references for auditability, including inferred requirements tagged as "implied" with reduced confidence when sourced from contextual cues.
 - **FR-003**: Users MUST be able to select or confirm the curated fact database before generation; every emitted resume bullet must reference at least one validated fact `source_id`, stay ATS-safe, and render in Typst without introducing stylistic artifacts.
 - **FR-004**: System MUST produce a `coverage.json` that maps each JobReq to matched fact IDs, generated bullets, coverage status (covered, partial, gap), and rationale notes for gaps.
-- **FR-005**: System MUST enforce governance gates so that automated QA (ruff linting, mypy static analysis, pytest unit and integration suites) verify provenance integrity and coverage completeness before the feature can ship.
+- **FR-005**: System MUST enforce governance gates so that automated QA (ruff linting, mypy static analysis, pytest unit and integration suites) fail if any resume bullet lacks a linked fact `source_id` or if `coverage.json` reports gaps without documented rationale; provenance integrity and coverage completeness MUST be validated automatically before the feature can ship.
 - **FR-006**: System MUST solicit user confirmation on any fact whose relevance or freshness is uncertain; unconfirmed facts are excluded from generation and flagged in session logs.
 
 *Example of marking unclear requirements:*

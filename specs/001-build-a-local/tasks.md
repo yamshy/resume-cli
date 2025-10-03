@@ -23,6 +23,7 @@
 - [ ] T014 [P] Add model validation tests at `/var/home/shyam/projects/resume-cli/tests/unit/models/test_job_posting_jobreq.py` for `JobPosting` and `JobReq` constraints from `data-model.md`.
 - [ ] T015 [P] Add model validation tests at `/var/home/shyam/projects/resume-cli/tests/unit/models/test_fact_and_bullet.py` for `CuratedFact`, embedded `Metric`/`DocumentRef`, and `ResumeBullet` rules.
 - [ ] T016 [P] Add model validation tests at `/var/home/shyam/projects/resume-cli/tests/unit/models/test_coverage_tracking.py` for `CoverageEntry`, `EmbeddingCacheEntry`, and `RunLog` behaviors.
+- [ ] T016a Add QA enforcement tests under `/var/home/shyam/projects/resume-cli/tests/qa/` that fail when resume bullets lack linked fact `source_id`s and when `coverage.json` records gaps without documented rationale, satisfying FR-005 automation.
 
 ## Phase 3.3: Core Implementation
 - [ ] T017 [P] Implement `JobPosting` Pydantic model in `/var/home/shyam/projects/resume-cli/src/resumecli/models/job_posting.py` with provenance validators.
@@ -51,15 +52,16 @@
 ## Phase 3.5: Polish
 - [ ] T037 [P] Add performance regression test at `/var/home/shyam/projects/resume-cli/tests/performance/test_build_runtime.py` asserting end-to-end runtime ≤ 60 seconds using sample data.
 - [ ] T038 [P] Update documentation in `/var/home/shyam/projects/resume-cli/README.md` and `/var/home/shyam/projects/resume-cli/specs/001-build-a-local/quickstart.md` to reflect finalized offline workflows, coverage review steps, and Conventional Commit reminders.
+- [ ] T038a Wire new QA scripts (`uv run qa-provenance`, `uv run qa-coverage`) into CI so builds fail when governance enforcement tests detect provenance or coverage regressions.
 
 ## Dependencies
-- T004–T016 depend on T001–T003 for project scaffolding.
+- T004–T016 and T016a depend on T001–T003 for project scaffolding.
 - T017 depends on T014; T018 depends on T014; T019 and T020 depend on T015; T021, T022, and T023 depend on T016.
 - T024 depends on T011, T014, and T018; T025 depends on T011, T015, and T019; T026 depends on T012, T015, and T020; T027 depends on T011 and T026.
 - T028 depends on T025; T029 depends on T025 and T022; T030 depends on T011, T023, and T029.
 - T031 depends on T004–T010 and T024–T030; T032 depends on T011, T024–T030; T033 depends on T005, T015, and T029; T034 depends on T006, T027, and T029; T035 depends on T007, T029, T030.
 - T036 depends on T031–T035.
-- T037 depends on T032 and T036; T038 depends on T032–T035 and T037.
+- T037 depends on T032 and T036; T038 depends on T032–T035 and T037; T038a depends on T016a, T032, and T037.
 
 ## Parallel Execution Examples
 - Run contract tests together once setup is complete:
