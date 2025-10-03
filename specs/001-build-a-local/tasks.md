@@ -10,20 +10,20 @@
 - [X] T003 Create package scaffolding under `/var/home/shyam/projects/resume-cli/src/resumecli/` (cli/, data/, models/, services/, templates/) with guarding `__init__.py` files and sample-data placeholders aligned to `quickstart.md`.
 
 ## Phase 3.2: Tests First (TDD)
-- [ ] T004 [P] Author failing contract test at `/var/home/shyam/projects/resume-cli/tests/contract/test_build_contract.py` validating `resumecli build` offline artifact generation per `contracts/cli/build.contract.md`.
-- [ ] T005 [P] Author failing contract test at `/var/home/shyam/projects/resume-cli/tests/contract/test_facts_contract.py` covering list/confirm/doctor flows per `contracts/cli/facts.contract.md`.
-- [ ] T006 [P] Author failing contract test at `/var/home/shyam/projects/resume-cli/tests/contract/test_templates_contract.py` exercising list/show/render expectations per `contracts/cli/templates.contract.md`.
-- [ ] T007 [P] Author failing contract test at `/var/home/shyam/projects/resume-cli/tests/contract/test_doctor_contract.py` asserting diagnostics, exit codes, and JSON output per `contracts/cli/doctor.contract.md`.
-- [ ] T008 [P] Add prompt contract test at `/var/home/shyam/projects/resume-cli/tests/contract/test_jobreq_extractor_prompt.py` to lock schema adherence for `/var/home/shyam/projects/resume-cli/specs/001-build-a-local/contracts/agents/jobreq_extractor.prompt.md`.
-- [ ] T009 [P] Add prompt contract test at `/var/home/shyam/projects/resume-cli/tests/contract/test_bullet_composer_prompt.py` verifying provenance rules for `/var/home/shyam/projects/resume-cli/specs/001-build-a-local/contracts/agents/bullet_composer.prompt.md`.
-- [ ] T010 [P] Add prompt contract test at `/var/home/shyam/projects/resume-cli/tests/contract/test_validation_reviewer_prompt.py` enforcing guardrails from `/var/home/shyam/projects/resume-cli/specs/001-build-a-local/contracts/agents/validation_reviewer.prompt.md`.
-- [ ] T011 [P] Create integration test at `/var/home/shyam/projects/resume-cli/tests/integration/test_cli_build_quickstart.py` covering quickstart Step 5 offline build flow and 60-second budget.
-- [ ] T012 [P] Create integration test at `/var/home/shyam/projects/resume-cli/tests/integration/test_cli_coverage_linking.py` asserting bullets cite facts/requirements per acceptance scenario 2.
-- [ ] T013 [P] Create integration test at `/var/home/shyam/projects/resume-cli/tests/integration/test_cli_doctor_quickstart.py` mirroring quickstart Step 4 diagnostics expectations.
-- [ ] T014 [P] Add model validation tests at `/var/home/shyam/projects/resume-cli/tests/unit/models/test_job_posting_jobreq.py` for `JobPosting` and `JobReq` constraints from `data-model.md`.
-- [ ] T015 [P] Add model validation tests at `/var/home/shyam/projects/resume-cli/tests/unit/models/test_fact_and_bullet.py` for `CuratedFact`, embedded `Metric`/`DocumentRef`, and `ResumeBullet` rules.
-- [ ] T016 [P] Add model validation tests at `/var/home/shyam/projects/resume-cli/tests/unit/models/test_coverage_tracking.py` for `CoverageEntry`, `EmbeddingCacheEntry`, and `RunLog` behaviors.
-- [ ] T016a Add QA enforcement tests under `/var/home/shyam/projects/resume-cli/tests/qa/` that fail when resume bullets lack linked fact `source_id`s and when `coverage.json` records gaps without documented rationale, satisfying FR-005 automation.
+- [X] T004 [P] Author failing contract test at `/var/home/shyam/projects/resume-cli/tests/contract/test_build_contract.py` validating `resumecli build` offline artifact generation per `contracts/cli/build.contract.md`.
+- [X] T005 [P] Author failing contract test at `/var/home/shyam/projects/resume-cli/tests/contract/test_facts_contract.py` covering list/confirm/doctor flows per `contracts/cli/facts.contract.md`.
+- [X] T006 [P] Author failing contract test at `/var/home/shyam/projects/resume-cli/tests/contract/test_templates_contract.py` exercising list/show/render expectations per `contracts/cli/templates.contract.md`.
+- [X] T007 [P] Author failing contract test at `/var/home/shyam/projects/resume-cli/tests/contract/test_doctor_contract.py` asserting diagnostics, exit codes, and JSON output per `contracts/cli/doctor.contract.md`.
+- [X] T008 [P] Add prompt contract test at `/var/home/shyam/projects/resume-cli/tests/contract/test_jobreq_extractor_prompt.py` to lock schema adherence for `/var/home/shyam/projects/resume-cli/specs/001-build-a-local/contracts/agents/jobreq_extractor.prompt.md`.
+- [X] T009 [P] Add prompt contract test at `/var/home/shyam/projects/resume-cli/tests/contract/test_bullet_composer_prompt.py` verifying provenance rules for `/var/home/shyam/projects/resume-cli/specs/001-build-a-local/contracts/agents/bullet_composer.prompt.md`.
+- [X] T010 [P] Add prompt contract test at `/var/home/shyam/projects/resume-cli/tests/contract/test_validation_reviewer_prompt.py` enforcing guardrails from `/var/home/shyam/projects/resume-cli/specs/001-build-a-local/contracts/agents/validation_reviewer.prompt.md`.
+- [X] T011 [P] Create integration test at `/var/home/shyam/projects/resume-cli/tests/integration/test_cli_build_quickstart.py` covering quickstart Step 5 offline build flow and 60-second budget.
+- [X] T012 [P] Create integration test at `/var/home/shyam/projects/resume-cli/tests/integration/test_cli_coverage_linking.py` asserting bullets cite facts/requirements per acceptance scenario 2.
+- [X] T013 [P] Create integration test at `/var/home/shyam/projects/resume-cli/tests/integration/test_cli_doctor_quickstart.py` mirroring quickstart Step 4 diagnostics expectations.
+- [X] T014 [P] Add model validation tests at `/var/home/shyam/projects/resume-cli/tests/unit/models/test_job_posting_jobreq.py` for `JobPosting` and `JobReq` constraints from `data-model.md`.
+- [X] T015 [P] Add model validation tests at `/var/home/shyam/projects/resume-cli/tests/unit/models/test_fact_and_bullet.py` for `CuratedFact`, embedded `Metric`/`DocumentRef`, and `ResumeBullet` rules.
+- [X] T016 [P] Add model validation tests at `/var/home/shyam/projects/resume-cli/tests/unit/models/test_coverage_tracking.py` for `CoverageEntry`, `EmbeddingCacheEntry`, and `RunLog` behaviors.
+- [X] T016a Add QA enforcement tests under `/var/home/shyam/projects/resume-cli/tests/qa/` that fail when resume bullets lack linked fact `source_id`s and when `coverage.json` records gaps without documented rationale, satisfying FR-005 automation.
 
 ## Phase 3.3: Core Implementation
 - [ ] T017 [P] Implement `JobPosting` Pydantic model in `/var/home/shyam/projects/resume-cli/src/resumecli/models/job_posting.py` with provenance validators.
